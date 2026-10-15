@@ -1,26 +1,84 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/*
+ * CertiChain design tokens.
+ * Deep navy / midnight foundation, electric-blue + restrained cyan accents,
+ * cool-gray content surfaces. Referenced with Tailwind utilities like
+ * `bg-night`, `bg-surface`, `text-muted`, `border-line`, `bg-brand`.
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-night: #060b18;
+  --color-night-2: #081020;
+  --color-surface: #0b1428;
+  --color-surface-2: #101c36;
+  --color-line: #1c2c50;
+  --color-line-soft: #16223f;
+  --color-brand: #2f6bff;
+  --color-brand-soft: #7ea5ff;
+  --color-brand-dim: #173063;
+  --color-aqua: #3fd6c9;
+  --color-ink: #e7eeff;
+  --color-muted: #8ea3cb;
+  --color-faint: #5d6f95;
+  --color-good: #34d399;
+  --color-warn: #fbbf24;
+  --color-bad: #f87171;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(47, 107, 255, 0.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 15%, rgba(63, 214, 201, 0.05), transparent 55%),
+    var(--color-night);
+  color: var(--color-ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Visible, consistent focus ring for keyboard users. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand-soft);
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
+::selection {
+  background: rgba(47, 107, 255, 0.35);
+}
+
+/* Restrained scrollbar. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #22335d transparent;
+}
+
+/* Reduced motion: kill transitions/animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Certificate print sheet: print exactly the document, nothing else. */
+@media print {
+  body {
+    background: #ffffff !important;
+  }
+  .print-hide {
+    display: none !important;
+  }
+  .print-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 auto !important;
+  }
 }

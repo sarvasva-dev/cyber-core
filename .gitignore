@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# CI workflow kept locally; requires `workflow` scope to push
+default
+.github/workflows/
