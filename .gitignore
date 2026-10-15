@@ -41,5 +41,4 @@ yarn-error.log*
 next-env.d.ts
 
 # CI workflow kept locally; requires `workflow` scope to push
-default
 .github/workflows/
